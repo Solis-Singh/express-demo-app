@@ -2,6 +2,7 @@ import express from 'express'
 import userRouter from './routes/taskRoutes.js'
 import morgan from 'morgan'
 import dotenv from 'dotenv'
+import mongoose from 'mongoose'
 
 const app = express();
 
@@ -9,6 +10,9 @@ const app = express();
 app.use(morgan("dev"));
 dotenv.config();
 
+mongoose.connect(process.env.MONGODB_URL).then(() =>{
+    console.log("MONGO-DB Connected Sucessfully");
+}).catch((err) => console.log(err));
 //custom middleware 
 // app.use((req,res,next) => {
 //     console.log("User Logged In  ..");
